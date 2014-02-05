@@ -135,9 +135,11 @@ public class HtmlStorage implements Serializable{
    * @return - htmlStorage object
    */
   public static HtmlStorage getPage(RequestManager rm, String origUrl, String stopDomain, Boolean forced) throws IOException {
-    synchronized (LOCK){
-      if (URL_HTML_MAPPING == null) {
-        URL_HTML_MAPPING = new UrlHtmlMapping(levelDbLocation);
+    if (URL_HTML_MAPPING == null){
+      synchronized (LOCK){
+        if (URL_HTML_MAPPING == null) {
+          URL_HTML_MAPPING = new UrlHtmlMapping(levelDbLocation);
+        }
       }
     }
 //        If data is available and force is false then fetch data from disk
@@ -149,9 +151,9 @@ public class HtmlStorage implements Serializable{
         localData = new HtmlStorage(null, null);
       }
       if (localData.htmlPage != null && localData.htmlPage.length() > 100 && localData.redirectUrl != null) {
-        synchronized (URL_HTML_MAPPING){
-//          HtmlStorage.storePageText(origUrl,localData);
-        }
+//        synchronized (URL_HTML_MAPPING){
+////          HtmlStorage.storePageText(origUrl,localData);
+//        }
         return localData;
       }
     }
@@ -163,9 +165,10 @@ public class HtmlStorage implements Serializable{
       System.err.println("some error fetching url " + origUrl);
       return new HtmlStorage("<html> </html>", "");
     }
+
     HtmlStorage htmlStorage = new HtmlStorage(pageUrl.htmlPage, pageUrl.redirectUrl);
     URL_HTML_MAPPING.put(origUrl, htmlStorage);
-    HtmlStorage.storePageText(origUrl, htmlStorage);
+//    HtmlStorage.storePageText(origUrl, htmlStorage);
     return htmlStorage;
   }
 

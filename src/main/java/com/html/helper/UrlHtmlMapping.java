@@ -1,13 +1,17 @@
 package com.html.helper;
 
 import org.iq80.leveldb.DB;
+import org.iq80.leveldb.DBIterator;
 import org.iq80.leveldb.WriteBatch;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UrlHtmlMapping {
   private DB db;
   private String DB_FILE = null;
+  private DBIterator dbi;
 
   public UrlHtmlMapping(String dbFileName) throws IOException {
     DB_FILE = dbFileName;
@@ -146,6 +150,24 @@ public class UrlHtmlMapping {
       }
     }
     return o;
+  }
+
+  public void seekToFirst(){
+    DBIterator dbi = db.iterator();
+    dbi.seekToLast();
+    this.dbi = dbi;
+  }
+
+  public Map.Entry<Object, Object> next() throws IOException, ClassNotFoundException {
+    Map.Entry<byte[], byte[]> i = this.dbi.prev();
+    if ( i== null){
+      return null;
+    }
+    final Object key = byteToObject(i.getKey());
+    final Object value = byteToObject(i.getValue());
+    Map<Object, Object> ent = new HashMap<Object, Object>();
+    ent.put(key, value);
+    return ent.entrySet().iterator().next();
   }
 
 
