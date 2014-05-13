@@ -104,7 +104,7 @@ public class HtmlStorageNew implements Serializable {
             pageUrl = rm.doRequest(origUrl, stopDomain);
         } catch (Exception e) {
             LOGGER.error("Some error fetching url " + origUrl, e);
-            return new DataStore("<html> </html>", "",0);
+            throw new IOException("could not fetch url");
         }
         DataStore dataStore;
         if (HtmlStorageNew.dataStore == null) {
