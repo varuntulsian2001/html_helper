@@ -1,4 +1,4 @@
-package com.html.helper;
+package com.walmart.labs.search.commons.htmlhelper;
 
 
 import com.google.common.net.InternetDomainName;
@@ -160,7 +160,7 @@ public class RequestManager {
         url = url.replaceAll("<", "%3c");
         url = url.replaceAll(">", "%3e");
         url = url.replaceAll("\\[", "%5b");
-        url = url.replaceAll("\\]", "%5d");
+        url = url.replaceAll("]", "%5d");
         url = url.replaceAll("\\|", "%7c");
         url = url.replaceAll("\\{", "%7b");
         url = url.replaceAll("}", "%7d");

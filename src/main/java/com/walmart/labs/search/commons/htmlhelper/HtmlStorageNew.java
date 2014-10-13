@@ -1,4 +1,4 @@
-package com.html.helper;
+package com.walmart.labs.search.commons.htmlhelper;
 
 import org.apache.log4j.Logger;
 

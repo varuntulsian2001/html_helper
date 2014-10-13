@@ -1,4 +1,4 @@
-package com.html.helper;
+package com.walmart.labs.search.commons.htmlhelper;
 
 import org.apache.tools.bzip2.CBZip2OutputStream;
 

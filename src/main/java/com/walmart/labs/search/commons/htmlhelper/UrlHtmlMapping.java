@@ -1,4 +1,4 @@
-package com.html.helper;
+package com.walmart.labs.search.commons.htmlhelper;
 
 import org.iq80.leveldb.DB;
 import org.iq80.leveldb.DBIterator;

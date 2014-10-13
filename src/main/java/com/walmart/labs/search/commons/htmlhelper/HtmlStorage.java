@@ -1,4 +1,4 @@
-package com.html.helper;
+package com.walmart.labs.search.commons.htmlhelper;
 
 import com.google.common.net.InternetDomainName;
 import org.jsoup.Jsoup;
