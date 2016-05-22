@@ -1,11 +1,13 @@
 package com.walmart.labs.search.commons.htmlhelper;
 
+import com.google.common.collect.Lists;
 import org.iq80.leveldb.DB;
 import org.iq80.leveldb.DBIterator;
 import org.iq80.leveldb.WriteBatch;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UrlHtmlMapping {
@@ -89,6 +91,9 @@ public class UrlHtmlMapping {
         try {
             bytesKey = objectToByte(key);
             byte[] b = db.get(bytesKey);
+            if (b==null){
+                return null;
+            }
             return byteToObject(b);
         } catch (IOException e) {
             e.printStackTrace();
@@ -180,7 +185,7 @@ public class UrlHtmlMapping {
 //    }
         test(mapping);
 //    System.out.println(new String(mapping.db.get("e".getBytes())));
-        mapping.close();
+//        mapping.close();
 
 //    ItemMapping mapping = new ItemMapping("mappingdb_Amazon");
 //    String s = mapping.get("921928");
@@ -188,9 +193,11 @@ public class UrlHtmlMapping {
     }
 
     private static void test(UrlHtmlMapping mapping) throws UnsupportedEncodingException {
+        String query = "iphone";
+        List<String> items = Lists.newArrayList("a", "b", "c");
         String s = " lol ";
-        mapping.put(s, 100);
-        Integer i = (Integer) mapping.get((Object) s);
+        mapping.put(query, items);
+        List<String> i = (List<String>) mapping.get((Object) s);
         System.out.println(i);
     }
 }
